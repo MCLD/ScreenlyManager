@@ -1,0 +1,31 @@
+# Get build image
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-stage
+WORKDIR /app
+
+# Copy source
+COPY . ./
+
+# Prerequisites
+RUN apt-get update && \
+    apt-get install zip -y
+
+# Publish
+RUN dotnet publish -c Release -o "release/ScreenlyManager-x86" -r win-x86 && \
+    dotnet publish -c Release -o "release/ScreenlyManager-x64" -r win-x64 && \
+    dotnet publish -c Release -o "release/ScreenlyManager-linux-x64" -r linux-x64 && \
+    dotnet publish -c Release -o "release/ScreenlyManager-linux-arm" -r linux-arm && \
+    dotnet publish -c Release -o "release/ScreenlyManager-osx" -r osx-x64
+
+RUN cd ScreenlyManager/release && \
+    zip -qr9 ../../ScreenlyManager-x86.zip ScreenlyManager-x86/* && \
+    zip -qr9 ../../ScreenlyManager-x64.zip ScreenlyManager-x64/* && \
+    zip -qr9 ../../ScreenlyManager-linux-x64.zip ScreenlyManager-linux-x64/* && \
+    zip -qr9 ../../ScreenlyManager-linux-arm.zip ScreenlyManager-linux-arm/* && \
+    zip -qr9 ../../ScreenlyManager-osx.zip ScreenlyManager-osx/*
+
+FROM alpine:latest AS publish-stage
+WORKDIR /app
+
+COPY --from=build-stage "/app/*.zip" /app/
+
+ENTRYPOINT ["/bin/sh", "-c", "cp /app/*.zip /ScreenlyManager/"]
