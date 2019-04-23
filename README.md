@@ -1,7 +1,7 @@
 # ScreenlyManager
 ScreenlyManager is a cross-platform commandline program written using [.NET Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2) to facilitate management of [Screenly OSE](https://www.screenly.io/ose/) installations.
 
-**The latest release is [Version 1.0.0](https://github.com/mcld/ScreenlyManager/releases/latest).**
+**The latest release is [Version 1.0.1](https://github.com/mcld/ScreenlyManager/releases/latest).**
 
 Current features:
 
