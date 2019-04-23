@@ -57,6 +57,7 @@ namespace ScreenlyManager
         private const string InvalidAssets = "Unable to fetch assets, error: {0}";
         private const string InvalidDeletion = "Error deleting asset {0}: {1}";
         private const string InvalidNoAddress = "No addresses specified.";
+        private const string InvalidWebRequest = "A problem happened querying the API: {0}";
 
         private const string HttpValue = "http://";
         private const string HttpsValue = "https://";
@@ -172,7 +173,19 @@ namespace ScreenlyManager
                                 = new AuthenticationHeaderValue("Basic", authentication);
                         }
 
-                        var response = await client.GetAsync(url);
+                        client.Timeout = TimeSpan.FromSeconds(30);
+
+                        HttpResponseMessage response = null;
+                        try
+                        {
+                            response = await client.GetAsync(url);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(string.Format(InvalidWebRequest, ex.Message));
+                            continue;
+                        }
+
                         if (!response.IsSuccessStatusCode)
                         {
                             Console.WriteLine(string.Format(InvalidAssets, response.StatusCode));

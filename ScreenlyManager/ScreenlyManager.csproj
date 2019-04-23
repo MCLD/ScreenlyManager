@@ -8,14 +8,13 @@
     <Company>Maricopa County Library District</Company>
     <Copyright>Copyright 2019 Maricopa County Library District</Copyright>
     <Description>ScreenlyManager provides a command-line interface for working with the Screenly OSE API.</Description>
-    <FileVersion>1.0.0</FileVersion>
     <PackageLicenseUrl>https://github.com/mcld/ScreenlyManager/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/mcld/ScreenlyManager/</PackageProjectUrl>
     <PackageReleaseNotes>See https://github.com/mcld/ScreenlyManager/releases/latest</PackageReleaseNotes>
     <Product>ScreenlyManager</Product>
     <RepositoryType>Git</RepositoryType>
     <RepositoryUrl>https://github.com/mcld/ScreenlyManager/</RepositoryUrl>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
